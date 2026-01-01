@@ -8,7 +8,7 @@ pipeline {
   }
 
   environment {
-    IMAGE_NAME = "kamalakar2210/board_game"
+    IMAGE_NAME = "kamalakar2210/board_games"
     IMAGE_TAG  = "${BUILD_NUMBER}"
 
     ARGO_REPO = "github.com/kamalakar22/argo-deploy.git"
