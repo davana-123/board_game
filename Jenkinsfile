@@ -96,24 +96,28 @@ pipeline {
       }
     }
 
-    /* =========================
-       Kaniko Build & Push
-       ========================= */
-    stage('Kaniko Build & Push') {
-      steps {
-        container('kaniko') {
-          sh '''
-            /kaniko/executor \
-              --context /workspace \
-              --dockerfile Dockerfile \
-              --destination ${IMAGE_NAME}:${IMAGE_TAG} \
-              --destination ${IMAGE_NAME}:latest \
-              --cache=true \
-              --cache-dir=/cache/kaniko
-          '''
-        }
-      }
+/* =========================
+   Kaniko Build & Push
+   ========================= */
+stage('Kaniko Build & Push') {
+  steps {
+    container('kaniko') {
+      sh '''
+        echo "Preparing Kaniko cache directory..."
+        mkdir -p /cache/kaniko
+
+        /kaniko/executor \
+          --context /workspace \
+          --dockerfile Dockerfile \
+          --destination ${IMAGE_NAME}:${IMAGE_TAG} \
+          --destination ${IMAGE_NAME}:latest \
+          --cache=true \
+          --cache-dir=/cache/kaniko
+      '''
     }
+  }
+}
+
 
     /* =========================
        Update ArgoCD
