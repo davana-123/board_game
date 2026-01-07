@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: boardgame
-          image: davana4602/board_game:latest
+          image: davana4602/board_game:1
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
